@@ -1,23 +1,52 @@
-# Next.js + Tailwind CSS Example
+> **EM DESENVOLVIMENTO!**
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+# Next.js + Tailwind CSS + PokeAP
 
-## Deploy your own
+This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js and how to consume the api [PokeApi](https://pokeapi.co/docs/v2) using ssr
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+<h1 align="center">
+    <img src="src/assets/logo-pokemon.png" width="100"/>
+</h1>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+<ol>
+    <li><a href="#about">About</a></li>
+        <li> <a href="#requirement">Requirements</a></li>
+        <li> <a href="#howtouse">How to use</a> </li>
+        <li> <a href="#resut">Development results</a> </li>
+        <li> <a href="#reference">References</a></li>
+</ol>
 
-## How to use
+<h2 id="about">About this project</h2>
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+The central idea of this project is to build a front-end in Next.js/Tailwindcss for the consumption of an API. For this, [PokéApi v2](https://pokeapi.co/docs/v2) was chosen.
+
+<h2 id="requirement">Requirements</h2>
+
+You need [Node Js](https://nodejs.org/en/) installed on your machine.
+
+<h2 id="howtouse">How to use</h2>
 
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app -- --example with-tailwindcss with-tailwindcss-app
+#clone this repository
+$ git clone https://github.com/smartinsdev/next-poke.git
+
+#Open the next-api folder and in the terminal run the command:
+$ cd next-poke
+$ npm install
+
+#Then let the application "run" using the command below:
+$ npm run dev
+
+#The application will be opened on port:3000 - go to http://localhost:3000.
+
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+<h2 id="result">Development results</h2>
+
+- Since the application is beginner level, it is simple, but it is geared towards using some basic concepts for consuming an API in Next. For example, the use of `getServerSideProps`.
+
+<h2 id="reference">References</h2>
+
+The application was developed according to the tutorial:
+
+- [Build a Pokedex with NextJS and Tailwind CSS - SSR vs SSG](https://youtu.be/LMRAEUPkFXI)
