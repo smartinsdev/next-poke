@@ -21,7 +21,6 @@ type Props = {
 const BASE_URL = 'https://pokeapi.co/api/v2/'
 
 const Home: NextPage<Props> = ({ pokemons }) => {
-  console.log(pokemons)
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
