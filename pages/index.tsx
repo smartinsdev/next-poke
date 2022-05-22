@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { getDataFromApi } from '../utils/getDataFromApi'
 
 export type Pokemon = {
   url: string
@@ -17,8 +18,6 @@ type Props = {
   count: number
   pokemons: Pokemon[]
 }
-
-const BASE_URL = 'https://pokeapi.co/api/v2/'
 
 const Home: NextPage<Props> = ({ pokemons }) => {
   return (
@@ -62,14 +61,13 @@ const Home: NextPage<Props> = ({ pokemons }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const getPokemons = await fetch(`${BASE_URL}pokemon/`)
-  const data = await getPokemons.json()
+  const getPokemonsData = await getDataFromApi('/pokemon')
   return {
     props: {
-      pokemons: data.results,
-      count: data.count,
-      nextPage: data.next,
-      previousPage: data.previous,
+      nextPage: getPokemonsData.next,
+      previousPage: getPokemonsData.previous,
+      count: getPokemonsData.count,
+      pokemons: getPokemonsData.results,
     },
   }
 }
