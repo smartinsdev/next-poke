@@ -22,5 +22,12 @@ export type Pokemon = {
       }
     }
   ]
-  imageUrl: string
+  abilities: [
+    {
+      ability: {
+        name: string
+      }
+    }
+  ]
+  image: string
 }

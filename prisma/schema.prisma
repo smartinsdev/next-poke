@@ -11,25 +11,25 @@ datasource db {
 }
 
 model Pokemon {
-  id      String             @id @default(cuid())
-  name    String
-  height  Float
-  weight  Float
-  image   String
-  type    PokemonOntype[]
-  ability PokemonOnAbility[]
+  id        String             @id @default(cuid())
+  name      String
+  height    Float
+  weight    Float
+  image     String
+  types     PokemonOntype[]
+  abilities PokemonOnAbility[]
 }
 
 model Type {
-  id      String          @id @default(cuid())
-  name    String
-  pokemon PokemonOntype[]
+  id       String          @id @default(cuid())
+  name     String
+  pokemons PokemonOntype[]
 }
 
 model Ability {
-  id      String             @id @default(cuid())
-  name    String
-  pokemon PokemonOnAbility[]
+  id       String             @id @default(cuid())
+  name     String
+  pokemons PokemonOnAbility[]
 }
 
 model PokemonOntype {

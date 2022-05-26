@@ -1,9 +1,9 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { getDataFromApi, getPokemonsDetail } from '../utils/getDataFromApi'
 import type { Pokemon } from '../types'
 import { Card } from '../components/Card'
+import { prisma } from '../lib/prisma'
 
 type Props = {
   nextPage: string | null
@@ -32,7 +32,8 @@ const Home: NextPage<Props> = ({ pokemons }) => {
               height={pokemon.height}
               weight={pokemon.weight}
               id={pokemon.id}
-              imageUrl={''}
+              image={pokemon.image}
+              abilities={pokemon.abilities}
             />
           ))}
         </div>
@@ -54,16 +55,24 @@ const Home: NextPage<Props> = ({ pokemons }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const data = await getDataFromApi('/pokemon')
-  const pokemons = await getPokemonsDetail(
-    data.results.map((value) => value.url)
-  )
-
+  const pokemons = await prisma.pokemon.findMany({
+    skip: 0,
+    take: 20,
+    include: {
+      types: {
+        include: {
+          type: true,
+        },
+      },
+      abilities: {
+        include: {
+          ability: true,
+        },
+      },
+    },
+  })
   return {
     props: {
-      nextPage: data.next,
-      previousPage: data.previous,
-      count: data.count,
       pokemons,
     },
   }
