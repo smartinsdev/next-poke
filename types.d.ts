@@ -17,7 +17,9 @@ export type Pokemon = {
   weight: string
   types: [
     {
-      type: string
+      type: {
+        name: string
+      }
     }
   ]
   imageUrl: string
