@@ -1,16 +1,9 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { getDataFromApi } from '../utils/getDataFromApi'
-
-export type Pokemon = {
-  url: string
-  name: string
-  img: string
-  type: string
-  height: string
-  weight: string
-}
+import { getDataFromApi, getPokemonsDetail } from '../utils/getDataFromApi'
+import type { Pokemon } from '../types'
+import { Card } from '../components/Card'
 
 type Props = {
   nextPage: string | null
@@ -30,18 +23,18 @@ const Home: NextPage<Props> = ({ pokemons }) => {
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-6xl font-bold">Welcome to NextPoke</h1>
 
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          {pokemons.map((pokemon, index) => {
-            return (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center px-2 py-3"
-              >
-                <h3>{pokemon.name}</h3>
-                <a href={pokemon.url}>detail</a>
-              </div>
-            )
-          })}
+        <div className="my-6 grid grid-cols-3 gap-2">
+          {pokemons.map((pokemon, index) => (
+            <Card
+              key={index}
+              name={pokemon.name}
+              types={pokemon.types}
+              height={pokemon.height}
+              weight={pokemon.weight}
+              id={pokemon.id}
+              imageUrl={''}
+            />
+          ))}
         </div>
       </main>
 
@@ -61,13 +54,17 @@ const Home: NextPage<Props> = ({ pokemons }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const getPokemonsData = await getDataFromApi('/pokemon')
+  const data = await getDataFromApi('/pokemon')
+  const pokemons = await getPokemonsDetail(
+    data.results.map((value) => value.url)
+  )
+
   return {
     props: {
-      nextPage: getPokemonsData.next,
-      previousPage: getPokemonsData.previous,
-      count: getPokemonsData.count,
-      pokemons: getPokemonsData.results,
+      nextPage: data.next,
+      previousPage: data.previous,
+      count: data.count,
+      pokemons,
     },
   }
 }
