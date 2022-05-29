@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Pokemon {
+  id        String             @id @default(cuid())
+  name      String
+  height    Float
+  weight    Float
+  image     String
+  types     PokemonOntype[]
+  abilities PokemonOnAbility[]
+}
+
+model Type {
+  id       String          @id @default(cuid())
+  name     String
+  pokemons PokemonOntype[]
+}
+
+model Ability {
+  id       String             @id @default(cuid())
+  name     String
+  pokemons PokemonOnAbility[]
+}
+
+model PokemonOntype {
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemonId String
+  type      Type    @relation(fields: [typeId], references: [id])
+  typeId    String
+
+  @@id([pokemonId, typeId])
+}
+
+model PokemonOnAbility {
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemonId String
+  ability   Ability @relation(fields: [abilityId], references: [id])
+  abilityId String
+
+  @@id([pokemonId, abilityId])
+}
