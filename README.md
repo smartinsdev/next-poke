@@ -1,6 +1,6 @@
 > **In development!**
 
-# Next.js + Tailwind CSS + PokeAP
+# Next.js + Tailwind CSS + PokeAPI
 
 This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js and how to consume the api [PokeApi](https://pokeapi.co/docs/v2) using ssr
 
